@@ -29,18 +29,18 @@ public class PepCheck {
      * De-serializes JSON into Person objects
      *
      * @return List of Person objects
-     * @throws IOException
      */
     private List<Person> mapPepData() throws IOException {
         ResourceLoader resourceLoader = new DefaultResourceLoader();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        return objectMapper.readValue(resourceLoader.getResource("classpath:pep_small.json").getFile(), new TypeReference<List<Person>>() {});
+        return objectMapper.readValue(resourceLoader.getResource("classpath:pep_small.json").getFile(), new TypeReference<>() {
+        });
     }
 
-    public static Person pepCheck(String name) {
+    public static Person pepCheck(String name) { // TODO: Refine searching. Allow searching using aliases
         for (Person person : persons) {
-            if (person.getName().equals(name)) {
+            if (person.getName().equalsIgnoreCase(name.trim())) {
                 return person;
             }
         }
