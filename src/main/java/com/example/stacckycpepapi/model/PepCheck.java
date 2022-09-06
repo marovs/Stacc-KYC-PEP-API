@@ -34,7 +34,7 @@ public class PepCheck {
         ResourceLoader resourceLoader = new DefaultResourceLoader();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        return objectMapper.readValue(resourceLoader.getResource("classpath:pep_small.json").getFile(), new TypeReference<>() {
+        return objectMapper.readValue(resourceLoader.getResource("classpath:pep_small.json").getInputStream(), new TypeReference<>() {
         });
     }
 
