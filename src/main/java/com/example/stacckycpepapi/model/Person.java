@@ -1,12 +1,19 @@
 package com.example.stacckycpepapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Builder
 public class Person {
 
+    private double score;
     private String id;
     private String schema;
     private String name;
