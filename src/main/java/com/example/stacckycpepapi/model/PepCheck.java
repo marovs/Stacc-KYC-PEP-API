@@ -1,12 +1,11 @@
 package com.example.stacckycpepapi.model;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
-
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class PepCheck {
 
@@ -19,24 +18,55 @@ public class PepCheck {
         }
 
         try {
-            persons = mapPepData();
+            persons = mapCSVToPerson();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     /**
-     * De-serializes JSON into Person objects
+     * De-serializes rows of CSV file into Person objects
      *
      * @return List of Person objects
      */
-    private List<Person> mapPepData() throws IOException {
-        ResourceLoader resourceLoader = new DefaultResourceLoader();
-        ObjectMapper objectMapper = new ObjectMapper();
+    private List<Person> mapCSVToPerson() throws IOException {
+        List<String[]> stringArrays = getStringArrays();
+        List<Person> persons = new ArrayList<>(stringArrays.size());
 
-        return objectMapper.readValue(resourceLoader.getResource("classpath:pep_small.json").getInputStream(), new TypeReference<>() {
-        });
+        for (String[] personArr : stringArrays.subList(1, stringArrays.size())) { // First array is header information
+            int idx = 0;
+
+            Person person = Person.builder()
+                    .id(personArr[idx++])
+                    .schema(personArr[idx++])
+                    .name(personArr[idx++])
+                    .aliases(personArr[idx++])
+                    .birth_date(personArr[idx++])
+                    .countries(personArr[idx++])
+                    .addresses(personArr[idx++])
+                    .identifiers(personArr[idx++])
+                    .sanctions(personArr[idx++])
+                    .phones(personArr[idx++])
+                    .emails(personArr[idx++])
+                    .dataset(personArr[idx++])
+                    .last_seen(personArr[idx++])
+                    .first_seen(personArr[idx])
+                    .build();
+
+            persons.add(person);
+        }
+        return persons;
     }
+
+    private static List<String[]> getStringArrays() throws IOException {
+        try (Stream<String> stringStream = Files.lines(Paths.get("src/main/resources/pep_small.csv"))) {
+            return stringStream.map(line -> line
+                    .replaceAll("\"", "")
+                    .split(","))
+                    .toList();
+        }
+    }
+
 
     public static Person pepCheck(String name) { // TODO: Refine searching. Allow searching using aliases
         for (Person person : persons) {
