@@ -1,10 +1,12 @@
 package com.example.stacckycpepapi.controller;
 
-import com.example.stacckycpepapi.model.PepCheck;
-import com.example.stacckycpepapi.model.Person;
-import com.example.stacckycpepapi.model.enheter.EnheterRoot;
-import com.example.stacckycpepapi.model.pep.PepRoot;
-import com.example.stacckycpepapi.model.roller.RollerRoot;
+import com.example.stacckycpepapi.domainmodel.roller.Navn;
+import com.example.stacckycpepapi.domainmodel.roller.Roller;
+import com.example.stacckycpepapi.service.PepCheck;
+import com.example.stacckycpepapi.service.Person;
+import com.example.stacckycpepapi.domainmodel.enheter.EnheterRoot;
+import com.example.stacckycpepapi.domainmodel.pep.PepRoot;
+import com.example.stacckycpepapi.domainmodel.roller.RollerRoot;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,35 +15,31 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class Controller {
 
+    private final RestTemplate restTemplate = new RestTemplate();
+
     @GetMapping("/hello")
     public String index() {
         return "Hello World";
     }
 
-    @GetMapping("/pep")
+    @GetMapping("/pepcheck")
     public Person pep(@RequestParam(value = "name", defaultValue = "") String name) {
         return PepCheck.pepCheck(name);
     }
 
-    @GetMapping("/callhello")
-    private String getHelloClient() {
-        String url = "http://localhost:8080/hello";
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(url, String.class);
-    }
-
-    @GetMapping("/knut")
-    public PepRoot getKnut() {
-        String url = "https://code-challenge.stacc.dev/api/pep?name=Knut Arild Hareide";
-
-        RestTemplate restTemplate = new RestTemplate();
+    @GetMapping("/pep")
+    public PepRoot getPep(@RequestParam(value = "name", defaultValue = "Knut Arild Hareide") String name) {
+        String url = "https://code-challenge.stacc.dev/api/pep?name=" + name;
 
         return restTemplate.getForObject(url, PepRoot.class);
     }
 
     @GetMapping("/roller")
-    public RollerRoot[] getRoller() {
-        String url = "https://code-challenge.stacc.dev/api/roller?orgNr=988971375";
+    public PepRoot getRoller(@RequestParam(value = "orgNr", defaultValue = "988971375") String orgNr) {
+        String url = "https://code-challenge.stacc.dev/api/roller?orgNr=" + orgNr;
+        System.out.println(url);
+
+        RollerRoot[] rollerRoots = restTemplate.getForObject(url, RollerRoot[].class);
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -49,10 +47,8 @@ public class Controller {
     }
 
     @GetMapping("/enheter")
-    public EnheterRoot getEnheter() {
-        String url = "https://code-challenge.stacc.dev/api/enheter?orgNr=981078365";
-
-        RestTemplate restTemplate = new RestTemplate();
+    public EnheterRoot getEnheter(@RequestParam(value = "orgNr", defaultValue = "981078365") String orgNr) {
+        String url = "https://code-challenge.stacc.dev/api/enheter?orgNr=" + orgNr;
 
         return restTemplate.getForObject(url, EnheterRoot.class);
     }
