@@ -41,9 +41,19 @@ public class Controller {
 
         RollerRoot[] rollerRoots = restTemplate.getForObject(url, RollerRoot[].class);
 
-        RestTemplate restTemplate = new RestTemplate();
+        for (RollerRoot rollerRoot : rollerRoots) {
+            System.out.println(rollerRoot.type.beskrivelse);
+            for (Roller roller : rollerRoot.roller) {
+                try {
+                    System.out.println(roller.type.beskrivelse + ", " + roller.person.navn.fornavn + " " + roller.person.navn.etternavn);
+                } catch (NullPointerException ignored) {
+                }
+            }
+        }
+        Navn navn = rollerRoots[0].roller.get(0).person.navn;
 
-        return restTemplate.getForObject(url, RollerRoot[].class);
+
+        return restTemplate.getForObject("https://code-challenge.stacc.dev/api/pep?name=" + navn.fornavn + " " + navn.etternavn, PepRoot.class);
     }
 
     @GetMapping("/enheter")
