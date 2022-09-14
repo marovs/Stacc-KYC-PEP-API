@@ -1,4 +1,4 @@
-package com.example.stacckycpepapi.model;
+package com.example.stacckycpepapi.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -59,10 +59,10 @@ public class PepCheck {
     }
 
     private static List<String[]> getStringArrays() throws IOException {
-        try (Stream<String> stringStream = Files.lines(Paths.get("src/main/resources/pep_small.csv"))) {
+        try (Stream<String> stringStream = Files.lines(Paths.get("src/main/resources/pep.csv"))) {
             return stringStream.map(line -> line
-                    .replaceAll("\"", "")
-                    .split(","))
+                    .substring(1, line.length()-1)
+                    .split("\",\""))
                     .toList();
         }
     }
