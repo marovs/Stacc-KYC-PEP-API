@@ -1,14 +1,8 @@
-package com.example.stacckycpepapi.model;
+package com.example.stacckycpepapi.service;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Builder
 public class Person {
