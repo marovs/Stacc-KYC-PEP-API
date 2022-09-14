@@ -1,4 +1,4 @@
-package com.example.stacckycpepapi.model.pep;
+package com.example.stacckycpepapi.domainmodel.pep;
 
 import java.util.ArrayList;
 

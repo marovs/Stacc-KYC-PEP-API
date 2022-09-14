@@ -1,4 +1,4 @@
-package com.example.stacckycpepapi.model.roller;
+package com.example.stacckycpepapi.domainmodel.roller;
 
 import java.util.ArrayList;
 

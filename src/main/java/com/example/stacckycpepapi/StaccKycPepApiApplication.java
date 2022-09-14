@@ -1,6 +1,6 @@
 package com.example.stacckycpepapi;
 
-import com.example.stacckycpepapi.model.PepCheck;
+import com.example.stacckycpepapi.service.PepCheck;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

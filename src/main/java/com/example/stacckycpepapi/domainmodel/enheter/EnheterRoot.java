@@ -1,4 +1,4 @@
-package com.example.stacckycpepapi.model.enheter;
+package com.example.stacckycpepapi.domainmodel.enheter;
 
 public class EnheterRoot {
     public String organisasjonsnummer;
