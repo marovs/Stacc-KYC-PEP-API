@@ -7,16 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PepCheck {
+public class CsvMapper {
 
-    public static PepCheck INSTANCE;
     private static List<Person> persons;
 
-    public PepCheck() {
-        if (INSTANCE == null) {
-            INSTANCE = this;
-        }
-
+    public static void initializePersons() {
         try {
             persons = mapCSVToPerson();
         } catch (IOException e) {
@@ -29,7 +24,7 @@ public class PepCheck {
      *
      * @return List of Person objects
      */
-    private List<Person> mapCSVToPerson() throws IOException {
+    private static List<Person> mapCSVToPerson() throws IOException {
         List<String[]> stringArrays = getStringArrays();
         List<Person> persons = new ArrayList<>(stringArrays.size());
 
@@ -67,13 +62,7 @@ public class PepCheck {
         }
     }
 
-
-    public static Person pepCheck(String name) { // TODO: Refine searching. Allow searching using aliases
-        for (Person person : persons) {
-            if (person.getName().equalsIgnoreCase(name.trim())) {
-                return person;
-            }
-        }
-        return null;
+    public static List<Person> getPersons() {
+        return persons;
     }
 }
