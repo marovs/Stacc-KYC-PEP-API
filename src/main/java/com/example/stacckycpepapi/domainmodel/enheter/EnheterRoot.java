@@ -4,6 +4,8 @@ public class EnheterRoot {
     public String organisasjonsnummer;
     public String navn;
     public Organisasjonsform organisasjonsform;
+    public String hjemmeside;
+    public Postadresse postadresse;
     public String registreringsdatoEnhetsregisteret;
     public boolean registrertIMvaregisteret;
     public Naeringskode1 naeringskode1;
