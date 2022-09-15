@@ -9,22 +9,14 @@ import java.util.stream.Stream;
 
 public class CsvMapper {
 
-    private static List<Person> persons;
-
-    public static void initializePersons() {
-        try {
-            persons = mapCSVToPerson();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public static final List<Person> persons = mapCSVToPerson();
 
     /**
      * De-serializes rows of CSV file into Person objects
      *
      * @return List of Person objects
      */
-    private static List<Person> mapCSVToPerson() throws IOException {
+    public static List<Person> mapCSVToPerson() {
         List<String[]> stringArrays = getStringArrays();
         List<Person> persons = new ArrayList<>(stringArrays.size());
 
@@ -53,16 +45,19 @@ public class CsvMapper {
         return persons;
     }
 
-    private static List<String[]> getStringArrays() throws IOException {
+    /**
+     * Reads pep.csv line by line and maps each line to a String[] after splitting appropriately
+     *
+     * @return List of String[]
+     */
+    private static List<String[]> getStringArrays() {
         try (Stream<String> stringStream = Files.lines(Paths.get("src/main/resources/pep.csv"))) {
             return stringStream.map(line -> line
                     .substring(1, line.length()-1)
                     .split("\",\""))
                     .toList();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-    }
-
-    public static List<Person> getPersons() {
-        return persons;
     }
 }

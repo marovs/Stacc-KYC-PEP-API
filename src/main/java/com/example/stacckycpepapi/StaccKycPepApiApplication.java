@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class StaccKycPepApiApplication {
 
     public static void main(String[] args) {
-        CsvMapper.initializePersons();
+        CsvMapper.mapCSVToPerson();
         SpringApplication.run(StaccKycPepApiApplication.class, args);
     }
 
