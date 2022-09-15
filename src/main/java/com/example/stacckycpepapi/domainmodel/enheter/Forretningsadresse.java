@@ -1,13 +1,13 @@
 package com.example.stacckycpepapi.domainmodel.enheter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Forretningsadresse{
     public String land;
     public String landkode;
     public String postnummer;
     public String poststed;
-    public ArrayList<String> adresse;
+    public List<String> adresse;
     public String kommune;
     public String kommunenummer;
 }

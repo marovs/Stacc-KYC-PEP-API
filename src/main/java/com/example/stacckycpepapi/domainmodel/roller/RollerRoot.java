@@ -1,12 +1,12 @@
 package com.example.stacckycpepapi.domainmodel.roller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class RollerRoot {
         public Type type;
         public String sistEndret;
-        public ArrayList<Roller> roller;
+        public List<Roller> roller;
     }
 
 

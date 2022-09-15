@@ -2,11 +2,11 @@ package com.example.stacckycpepapi.service;
 
 import lombok.AllArgsConstructor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
-public class Pep {
+public class PepPerson {
 
     public int numberOfHits;
-    public ArrayList<Person> hits;
+    public List<Person> hits;
 }
