@@ -1,8 +1,10 @@
 package com.example.stacckycpepapi.service;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Getter
 @Builder
 public class Person {

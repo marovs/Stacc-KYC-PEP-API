@@ -1,5 +1,8 @@
 package com.example.stacckycpepapi.domainmodel.enheter;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class EnheterRoot {
     public String organisasjonsnummer;
     public String navn;
