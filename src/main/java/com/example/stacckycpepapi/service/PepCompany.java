@@ -1,5 +1,6 @@
 package com.example.stacckycpepapi.service;
 
+import com.example.stacckycpepapi.domainmodel.enheter.EnheterRoot;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 
@@ -11,4 +12,5 @@ public class PepCompany {
 
     public int numberOfCompanyHits;
     public List<PepPerson> companyHits;
+    public EnheterRoot enhet;
 }

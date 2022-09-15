@@ -1,5 +1,6 @@
 package com.example.stacckycpepapi.service;
 
+import com.example.stacckycpepapi.domainmodel.enheter.EnheterRoot;
 import com.example.stacckycpepapi.domainmodel.roller.Roller;
 import com.example.stacckycpepapi.domainmodel.roller.RollerRoot;
 
@@ -20,7 +21,7 @@ public class PepCheckService {
         return new PepPerson(numberOfHits, hits);
     }
 
-    public static PepCompany checkCompany(RollerRoot[] rollerRoots) {
+    public static PepCompany checkCompany(RollerRoot[] rollerRoots, EnheterRoot enheterRoot) {
         int numberOfCompanyHits = 0;
         List<PepPerson> companyHits = new ArrayList<>();
         List<String> names = findNamesFromRoller(rollerRoots);
@@ -33,7 +34,7 @@ public class PepCheckService {
                 companyHits.add(pepPerson);
             }
         }
-        return new PepCompany(numberOfCompanyHits, companyHits);
+        return new PepCompany(numberOfCompanyHits, companyHits, enheterRoot);
     }
 
     private static List<String> findNamesFromRoller(RollerRoot[] rollerRoots) {
