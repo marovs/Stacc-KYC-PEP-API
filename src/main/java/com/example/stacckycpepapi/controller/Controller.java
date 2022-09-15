@@ -25,6 +25,7 @@ public class Controller {
         return "Hello World";
     }
 
+    // TODO: Remove endpoint
     @GetMapping("/pepcheck")
     public PepPerson pep(@RequestParam(value = "name", defaultValue = "") String name) {
         return PepCheckService.checkPerson(name);
@@ -46,6 +47,7 @@ public class Controller {
         return PepCheckService.checkCompany(rollerRoots, enheterRoot);
     }
 
+    // TODO: Keep endpoint?
     @GetMapping("/enheter")
     public EnheterRoot getEnheter(@RequestParam(value = "orgNr", defaultValue = "981078365") String orgNr) {
         String url = ENHETER + orgNr;
