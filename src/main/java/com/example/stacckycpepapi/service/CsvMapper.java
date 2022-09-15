@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -27,7 +28,7 @@ public class CsvMapper {
                     .id(personArr[idx++])
                     .schema(personArr[idx++])
                     .name(personArr[idx++])
-                    .aliases(personArr[idx++])
+                    .aliases(splitAliases(personArr[idx++]))
                     .birth_date(personArr[idx++])
                     .countries(personArr[idx++])
                     .addresses(personArr[idx++])
@@ -43,6 +44,10 @@ public class CsvMapper {
             persons.add(person);
         }
         return persons;
+    }
+
+    private static List<String> splitAliases(String aliases) {
+        return Arrays.stream(aliases.split(";")).toList();
     }
 
     /**
