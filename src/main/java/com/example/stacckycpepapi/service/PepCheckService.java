@@ -9,13 +9,16 @@ import java.util.List;
 
 public class PepCheckService {
 
-    public static PepPerson checkPerson(String name) { // TODO: Refine searching. Allow searching using aliases
+    public static PepPerson checkPerson(String name) { // TODO: Refine/optimize searching
         int numberOfHits = 0;
         List<Person> hits = new ArrayList<>();
+        String trimmedName = name.trim();
         for (Person person : CsvMapper.persons) {
-            if (person.getName().equalsIgnoreCase(name.trim())) {
-                numberOfHits++;
-                hits.add(person);
+            for (String personName : person.getNames()) {
+                if (personName.equalsIgnoreCase(trimmedName)) {
+                    numberOfHits++;
+                    hits.add(person);
+                }
             }
         }
         return new PepPerson(numberOfHits, hits);
