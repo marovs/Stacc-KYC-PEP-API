@@ -2,11 +2,12 @@ package com.example.stacckycpepapi.controller;
 
 import com.example.stacckycpepapi.domainmodel.roller.Navn;
 import com.example.stacckycpepapi.domainmodel.roller.Roller;
-import com.example.stacckycpepapi.service.PepCheck;
-import com.example.stacckycpepapi.service.Person;
+import com.example.stacckycpepapi.service.Pep;
+import com.example.stacckycpepapi.service.CsvMapper;
 import com.example.stacckycpepapi.domainmodel.enheter.EnheterRoot;
 import com.example.stacckycpepapi.domainmodel.pep.PepRoot;
 import com.example.stacckycpepapi.domainmodel.roller.RollerRoot;
+import com.example.stacckycpepapi.service.PepCheckService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +24,8 @@ public class Controller {
     }
 
     @GetMapping("/pepcheck")
-    public Person pep(@RequestParam(value = "name", defaultValue = "") String name) {
-        return PepCheck.pepCheck(name);
+    public Pep pep(@RequestParam(value = "name", defaultValue = "") String name) {
+        return PepCheckService.pepCheck(name);
     }
 
     @GetMapping("/pep")
@@ -44,16 +45,15 @@ public class Controller {
         for (RollerRoot rollerRoot : rollerRoots) {
             System.out.println(rollerRoot.type.beskrivelse);
             for (Roller roller : rollerRoot.roller) {
-                try {
+                if (roller.person != null)
                     System.out.println(roller.type.beskrivelse + ", " + roller.person.navn.fornavn + " " + roller.person.navn.etternavn);
-                } catch (NullPointerException ignored) {
-                }
             }
         }
-        Navn navn = rollerRoots[0].roller.get(0).person.navn;
+        Navn navn = rollerRoots[1].roller.get(0).person.navn;
+        String navnString = navn.fornavn + " " + navn.etternavn;
 
 
-        return restTemplate.getForObject("https://code-challenge.stacc.dev/api/pep?name=" + navn.fornavn + " " + navn.etternavn, PepRoot.class);
+        return getPep(navnString);
     }
 
     @GetMapping("/enheter")
