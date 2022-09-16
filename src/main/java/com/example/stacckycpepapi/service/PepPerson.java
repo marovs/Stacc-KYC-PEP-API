@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Object containing information about a PEP
+ */
 @AllArgsConstructor
 public class PepPerson {
 

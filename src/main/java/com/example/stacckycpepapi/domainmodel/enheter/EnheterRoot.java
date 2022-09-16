@@ -2,6 +2,9 @@ package com.example.stacckycpepapi.domainmodel.enheter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * Domain object containing information about a company
+ */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class EnheterRoot {
     public String organisasjonsnummer;

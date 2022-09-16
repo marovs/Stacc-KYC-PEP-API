@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Object containing information about PEP in a company and information about the company
+ */
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PepCompany {
