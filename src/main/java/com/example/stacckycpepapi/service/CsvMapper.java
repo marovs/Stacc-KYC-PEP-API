@@ -47,6 +47,9 @@ public class CsvMapper {
     }
 
     private static List<String> splitAliases(String aliases) {
+        if (aliases.isBlank()) {
+            return new ArrayList<>();
+        }
         return Arrays.stream(aliases.split(";")).toList();
     }
 
