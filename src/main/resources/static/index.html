@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PEP Sjekk</title>
+</head>
+<body>
+    <h1>PEP sjekk av enkeltperson eller organisasjon</h1><br>
+
+    <h3>Sjekk av enkeltperson</h3>
+    <form action="/pep" method="get">
+        <label for="name">Navn</label><br>
+        <input type="text" id="name" name="name"><br>
+        <input type="submit" value="Søk">
+    </form><br><br>
+
+    <h3>Sjekk av organisasjon</h3>
+    <form action="/roller" method="get">
+        <label for="roller">Organisasjonsnummer</label><br>
+        <input type="text" id="roller" name="orgNr"><br>
+        <input type="submit" value="Søk">
+    </form>
+</body>
+</html>
