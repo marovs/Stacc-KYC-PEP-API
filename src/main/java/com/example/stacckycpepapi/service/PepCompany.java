@@ -16,4 +16,8 @@ public class PepCompany {
     public int numberOfCompanyHits;
     public List<PepPerson> companyHits;
     public EnheterRoot enhet;
+
+    public PepCompany() {
+
+    }
 }

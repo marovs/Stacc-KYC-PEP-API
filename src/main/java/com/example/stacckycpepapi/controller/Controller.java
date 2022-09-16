@@ -41,6 +41,9 @@ public class Controller {
      */
     @GetMapping("/roller")
     public PepCompany roller(@RequestParam(value = "orgNr", defaultValue = "") String orgNr) {
+        if (orgNr.isBlank()) {
+            return new PepCompany();
+        }
         String url = ROLLER + orgNr;
         RollerRoot[] rollerRoots = restTemplate.getForObject(url, RollerRoot[].class);
 
